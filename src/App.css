@@ -1,0 +1,13 @@
+/* _____Navbar menu_____ */
+
+.bg-nav{
+    background-color: #e0c8e9e3;
+}
+
+.navbar-brand{
+    color: #100016f2;
+}
+
+.navbar-nav .nav-link{
+    color: #100016f2;
+}
