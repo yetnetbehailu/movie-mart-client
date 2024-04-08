@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import BrowserRouter
 import Navbar from './components/Navbar';
 import MovieList from './components/movies/MovieList';
+import MovieCreate from './components/movies/MovieCreate';
 import './App.css';
 
 function App() {
@@ -10,8 +11,13 @@ function App() {
       <>
         {/* Render Navbar component */}
         <Navbar />
-        {/* Render the MovieList component */}
-        <MovieList />
+        <Routes>
+          {/* Currently landing page also display the MovieList replace element when adding a separate landing page eg. <Home /> */}
+          <Route path="/" element={<MovieList />} />
+          {/* Render the MovieList component */}
+          <Route path="/movies" element={<MovieList />} />
+          <Route path='/movies/create' element={<MovieCreate />}></Route>
+        </Routes>
       </>
     </Router>
   );

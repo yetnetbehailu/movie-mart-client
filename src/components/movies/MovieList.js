@@ -1,5 +1,6 @@
 import React,{ useState, useEffect} from "react";
 import axios from "axios"; // Import Axios for making HTTP requests
+import { Link } from "react-router-dom";
 import "./movies.css";
 import { formatDate } from "../../helpers/formatDate";
 
@@ -15,7 +16,7 @@ const MovieList = () => {
         const fetchMovies = async () => {
             try {
                 // Make a GET request to the backend API to fetch movies
-                const response = await axios.get('https://localhost:7159/api/movies');
+                const response = await axios.get('http://localhost:5012/api/movies/');
                 // Update the state with the fetched movies
                 setMovies(response.data);
             } catch (error) {
@@ -32,7 +33,9 @@ const MovieList = () => {
             <div className="row">
                 <div className="create-movie-content">
                 <span className="py-1 px-2">Click here to add a movie</span>
-                <button className="btn create-movie-btn"><i className="pe-1 fa-regular fa-square-plus fa-sm"></i>New</button>
+                <Link to="/movies/create" className="btn create-movie-btn">
+                    <i className="pe-1 fa-regular fa-square-plus fa-sm"></i>New
+                </Link>
                 </div>
             </div>
             <div className="row">
