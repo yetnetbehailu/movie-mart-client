@@ -1,0 +1,144 @@
+/* ____MovieCreate page____ */
+
+.movie-form{
+    border-radius: 1rem;
+    box-shadow: 0px 1px 8px 1px rebeccapurple;
+    background-color: #ede0f2;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.form-title{
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #100016f2;
+}
+
+.form-content{
+    font-family: "Crimson Text", sans-serif;
+    font-size: 1.1rem;
+    color: #100016f2;
+}
+
+.form-label{
+    margin:6px 6px 0px 0px;
+}
+
+.form-create-btn{
+    font-size: 1.1rem;
+    border: 1px solid rebeccapurple;
+    box-shadow: 0px 0px 3px 1px rebeccapurple;
+    padding: 3px 18px;
+    color: #100016f2;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+.form-control{
+    color:#100016f2;
+}
+
+.textarea{
+    height: 120px;
+    resize: vertical;
+}
+
+.movie-form input,
+.movie-form textarea {
+    width: 71%;
+}
+
+/* ________________ Media Queries ______________ */
+
+/* Medium screens */
+
+@media (min-width: 768px) {
+    .movie-form{
+        margin-top: 3rem;
+    }
+
+    .language-content {
+        padding: 0 0 0 12.3px;
+    }
+
+    .duration-content {
+        padding: 0px 14px 0 0px;
+    }
+
+    .image-content {
+        padding: 0 0 0 12.3px;
+    }
+
+    .date-content {
+        padding: 0px 14px 0 0px;
+    }
+}
+
+/* Large screens */
+
+@media (min-width: 1024px) {
+    .language-content {
+        padding: 0 3.3rem 0 0;
+    }
+
+    .duration-content {
+        padding: 0 3.3rem 0 0;
+    }
+
+    .image-content{
+        padding: 0 3.3rem 0 0;
+    }
+
+    .date-content{
+        padding: 0 3.3rem 0 0;
+    }
+}
+
+/* X-Large screens */
+
+@media (min-width: 1200px) {
+    .language-content {
+        padding: 0;
+
+    }
+
+    .duration-content {
+        padding: 0 3.9rem 0 0;
+        margin-right: 2.5rem;
+    }
+
+    .image-content{
+        padding: 0;
+    }
+
+    .date-content{
+        padding: 0 3.9rem 0 0;
+        margin-right: 2.5rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .language-content {
+        padding: 0 0 0 0.8rem;
+    }
+
+    .duration-content {
+        padding: 0 4.5rem 0 0;
+        margin-right: 5rem;
+    }
+
+    .image-content{
+        padding: 0 0 0 0.8rem;
+    }
+
+    .date-content{
+        padding: 0 4.5rem 0 0;
+        margin-right: 5rem;
+    }
+}
