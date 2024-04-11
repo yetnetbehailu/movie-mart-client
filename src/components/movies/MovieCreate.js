@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "./movieCreate.css";
 
 const MovieCreate = () => {
+    const navigate = useNavigate(); // Initialize navigate hook
+
     // Define state for movie data
     const [movieData, setMovieData] = useState({
         title: '',
@@ -18,7 +21,6 @@ const MovieCreate = () => {
 
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
 
     // Function handles changes in form input fields
     const handleChange = (e) => {
@@ -66,16 +68,14 @@ const MovieCreate = () => {
             });
             
             if (response.status === 200) {
-                setSuccessMessage('Movie created successfully.');
-                setErrorMessage('');
+                // Redirect to MovieList page with success message as query parameter
+                navigate('/movies?success=Movie created successfully!');
             } else {
                 setErrorMessage('Failed to create movie. Please try again.');
-                setSuccessMessage('');
             }
         } catch (error) {
             // Handle network errors or other exceptions
             setErrorMessage('An error occurred while creating the movie.');
-            setSuccessMessage('');
         }
 
     };
@@ -131,8 +131,6 @@ const MovieCreate = () => {
                             <button type="submit" className="btn form-create-btn">Enter</button>
                         </div>
                         {errorMessage && <div className="error-message">{errorMessage}</div>}
-                        {successMessage && <div className="success-message">{successMessage}</div>}
-
                     </form>
                 </div>
             </div>
