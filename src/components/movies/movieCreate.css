@@ -54,6 +54,12 @@ label {
     width: 71%;
 }
 
+.toast-error{
+    text-align: center;
+    border-radius: 0;
+    padding: 10px;
+}
+
 /* ________________ Media Queries ______________ */
 
 /* Medium screens */
