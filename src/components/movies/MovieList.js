@@ -72,7 +72,9 @@ const MovieList = () => {
                             </p>
                         </div>
                         <div className="d-flex justify-content-evenly mt-2">
-                            <button className="btn card-btn"><i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit</button>
+                        <Link to={`/movies/edit/${movie.movieId}`} className="btn card-btn">
+                            <i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit
+                        </Link>
                             <button className="btn card-btn"><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete</button>
                         </div>
                         <p className="text-center my-1">

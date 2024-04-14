@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Im
 import Navbar from './components/Navbar';
 import MovieList from './components/movies/MovieList';
 import MovieCreate from './components/movies/MovieCreate';
+import MovieEdit from './components/movies/MovieEdit';
 import './App.css';
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
         <Routes>
           {/* Currently landing page also display the MovieList replace element when adding a separate landing page eg. <Home /> */}
           <Route path="/" element={<MovieList />} />
-          {/* Render the MovieList component */}
+          {/* Render the movie associated components */}
           <Route path="/movies" element={<MovieList />} />
           <Route path='/movies/create' element={<MovieCreate />}></Route>
+          <Route path='/movies/edit/:movieId' element={<MovieEdit />}></Route>
         </Routes>
       </>
     </Router>
