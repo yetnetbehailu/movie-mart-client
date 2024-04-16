@@ -3,6 +3,7 @@ import axios from "axios"; // Import Axios for making HTTP requests
 import { Link } from "react-router-dom";
 import "./movies.css";
 import { formatDate } from "../../helpers/formatDate";
+import Modal from "./MovieDeleteModal";
 
 // MovieList functional component
 const MovieList = () => {
@@ -10,6 +11,8 @@ const MovieList = () => {
     // Define state to hold the list of movies
     const [movies, setMovies] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [movieToDelete, setMovieToDelete] = useState(null);
 
     // useEffect hook to fetch movies when the component is first rendered
     useEffect(() => {
@@ -35,6 +38,21 @@ const MovieList = () => {
 
         fetchMovies();
     }, []); // The empty dependency array ensures this effect will be executed only once when the component is first rendered
+
+
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:5012/api/movies/${movieToDelete}`);
+            setMovies(movies.filter(movie => movie.movieId !== movieToDelete)); // Remove deleted movie from list of movies stored in the state
+            setSuccessMessage('Movie deleted successfully');
+        } catch (error) {
+            console.error('Error deleting movie:', error);
+        } finally {
+            setMovieToDelete(null); // Reset movieToDelete state
+            setShowDeleteModal(false); // Close delete modal
+        }
+    };
+
 
     // Render the MovieList component
     return (
@@ -72,10 +90,14 @@ const MovieList = () => {
                             </p>
                         </div>
                         <div className="d-flex justify-content-evenly mt-2">
-                        <Link to={`/movies/edit/${movie.movieId}`} className="btn card-btn">
-                            <i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit
-                        </Link>
-                            <button className="btn card-btn"><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete</button>
+                            <Link to={`/movies/edit/${movie.movieId}`} className="btn card-btn">
+                                <i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit
+                            </Link>
+                            <button className="btn card-btn" onClick={() => {
+                                setMovieToDelete(movie.movieId); // Set movieToDelete state
+                                setShowDeleteModal(true);
+                                }}><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete
+                            </button>
                         </div>
                         <p className="text-center my-1">
                             <small className="text-muted fs-date">Release date: <span>{formatDate(movie.releaseDate)}</span></small>
@@ -84,6 +106,13 @@ const MovieList = () => {
                     ))}
                 </div>
             </div>
+            {/* Modal for delete confirmation */}
+            <Modal
+                show={showDeleteModal}
+                movieTitle={movies.find(movie => movie.movieId === movieToDelete)?.title}
+                onConfirm={handleDelete}
+                onCancel={() => setShowDeleteModal(false)}
+            />
         </>
     );
 };
