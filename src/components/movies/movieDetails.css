@@ -1,0 +1,47 @@
+/* ____MovieDetails page____ */
+
+.movie-details {
+    border-radius: 1rem;
+    box-shadow: 0px 1px 8px 1px rebeccapurple;
+    background-color: #ede0f2;
+    margin: 1rem;
+    height: fit-content;
+}
+
+.go-back-link{
+    font-family: "Crimson Text", sans-serif;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #100016f2;
+    transition: text-shadow 0.3s;
+}
+
+.go-back-link:hover {
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* ________________ Media Queries ______________ */
+
+/* Medium screens */
+
+@media (min-width: 768px) {
+    .movie-details {
+        width: 96%;
+    }
+}
+
+/* Large screens */
+
+@media (min-width: 1024px) {
+    .movie-details {
+        width: 97%;
+    }
+}
+
+/* X-Large screens */
+
+@media (min-width: 1440px) {
+    .movie-details {
+        width: 98%;
+    }
+}
