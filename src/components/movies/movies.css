@@ -6,6 +6,7 @@
     box-shadow: 0px 1px 8px 1px rebeccapurple;
     background-color: #ede0f2;
     margin: 1rem;
+    height: 37rem;
 }
 
 .movie-image {
@@ -54,6 +55,15 @@ mark {
     box-shadow: 0px 0px 3px 1px rebeccapurple;
     padding: 3px 18px;
     color: #100016f2;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+}
+
+.card-btn:hover{
+    transform: translateY(1px);
+    box-shadow: 0px 0px 3px 1px rebeccapurple inset;
+    background-color: #e0c8e9e3;
 }
 
 .create-movie-btn {
@@ -62,6 +72,14 @@ mark {
     box-shadow: 0px 0px 3px 1px rebeccapurple;
     color: #100016f2;
     padding: 3px 7px 1px;
+    background-color: #e0c8e9e3;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.create-movie-btn:hover{
+    transform: translateY(1px);
+    box-shadow: 0px 0px 3px 1px rebeccapurple inset;
     background-color: #e0c8e9e3;
 }
 
@@ -77,6 +95,16 @@ mark {
     text-align: center;
     border-radius: 0;
     padding: 10px;
+}
+
+.read-more-link {
+    text-decoration: none;
+    color: #100016f2;
+    transition: text-shadow 0.3s;
+}
+
+.read-more-link:hover {
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); 
 }
 
 /*____Movie delete modal____*/
