@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import MovieList from './components/movies/MovieList';
 import MovieCreate from './components/movies/MovieCreate';
 import MovieEdit from './components/movies/MovieEdit';
+import MovieDetails from './components/movies/MovieDetails';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/movies" element={<MovieList />} />
           <Route path='/movies/create' element={<MovieCreate />}></Route>
           <Route path='/movies/edit/:movieId' element={<MovieEdit />}></Route>
+          <Route path='/movies/details/:movieId' element={<MovieDetails />}></Route>
         </Routes>
       </>
     </Router>

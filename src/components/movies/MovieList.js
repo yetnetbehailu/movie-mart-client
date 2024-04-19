@@ -75,6 +75,7 @@ const MovieList = () => {
                     {/* Map over the list of movies to render use movieId as key to identify each movie */}
                     {movies.map(movie => (
                     <div key={movie.movieId} className="col-12 col-md-6 col-lg-4 col-xl-3 movie-card text-font">
+                        <Link to={`/movies/details/${movie.movieId}`} className="read-more-link fs-6">Read More..</Link>
                         <p className="card-genre fs-5">
                             <mark>{movie.genre.name}</mark>
                         </p>
