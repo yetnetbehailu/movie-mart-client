@@ -1,0 +1,59 @@
+.register-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-title{
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+}
+
+.register-form {
+    max-width: 300px;
+    width: 100%; 
+    padding: 20px;
+    background-color: #ede0f2;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-form-btn {
+    padding: 4px 0;
+    border: 1px solid rebeccapurple;
+    box-shadow: 0px 0px 3px 1px rebeccapurple;
+    border-radius: 5px;
+    color: #100016f2;
+    cursor: pointer;
+    font-family: "Crimson Text", sans-serif;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 1.2rem;
+    width: 50%;
+    margin: auto;
+}
+
+.register-form-btn:hover {
+    transform: translateY(1px);
+    box-shadow: 0px 0px 3px 1px rebeccapurple inset;
+    background-color: #e0c8e9e3;
+}
+
+/* ________________ Media Queries ______________ */
+
+/* Medium screens */
+
+@media (min-width: 768px) {
+    .register-form {
+        max-width: 450px;
+    }
+}
