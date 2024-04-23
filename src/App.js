@@ -5,6 +5,7 @@ import MovieList from './components/movies/MovieList';
 import MovieCreate from './components/movies/MovieCreate';
 import MovieEdit from './components/movies/MovieEdit';
 import MovieDetails from './components/movies/MovieDetails';
+import Registration from './components/auth/Register'; 
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/movies/create' element={<MovieCreate />}></Route>
           <Route path='/movies/edit/:movieId' element={<MovieEdit />}></Route>
           <Route path='/movies/details/:movieId' element={<MovieDetails />}></Route>
+          <Route path='/register' element={<Registration />} />
         </Routes>
       </>
     </Router>
