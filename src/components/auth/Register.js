@@ -4,9 +4,9 @@ import './register.css'
 
 const Registration = () => {
     const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: ''
+        UserName: '',
+        Email: '',
+        PasswordHash: ''
     });
 
     const handleChange = (e) => {
@@ -18,9 +18,9 @@ const Registration = () => {
 
         try {
             const response = await axios.post('http://localhost:5012/api/auth/register', {
-                UserName: formData.username,
-                Email: formData.email,
-                PasswordHash: formData.password
+                UserName: formData.UserName,
+                Email: formData.Email,
+                PasswordHash: formData.PasswordHash
             });
     
             console.log('Registration successful:', response);
@@ -35,9 +35,9 @@ const Registration = () => {
         <div className="register-container">
             <form className="register-form" onSubmit={handleSubmit}>
                 <h2 className='register-title'>Register</h2>
-                <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} />
-                <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-                <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className='mb-3' />
+                <input type="text" name="UserName" placeholder="Username" value={formData.UserName} onChange={handleChange} />
+                <input type="email" name="Email" placeholder="Email" value={formData.Email} onChange={handleChange} />
+                <input type="password" name="PasswordHash" placeholder="Password" value={formData.PasswordHash} onChange={handleChange} className='mb-3' />
                 <button type="submit" className='btn register-form-btn'>Register</button>
             </form>
         </div>
