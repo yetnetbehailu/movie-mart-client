@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './signIn.css'
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [formData, setFormData] = useState({
         UserName: '',
         Email:'',
@@ -12,6 +13,19 @@ const SignIn = () => {
     });
 
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const successMessage = searchParams.get('success');
+        if (successMessage) {
+            setSuccessMessage(successMessage);
+            setTimeout(() => {
+                setSuccessMessage('');
+            }, 3000);
+        }
+    }, [location.search]); // Watch for changes in location.search
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,22 +51,29 @@ const SignIn = () => {
     };
 
     return (
-        <div className='signin-container'>
-            <form className='signin-form' onSubmit={handleSubmit}>
-                <h1 className='signin-title'>Sign In</h1>
-                <p className="signin-note ps-1 mb-1 text-muted"> Enter username or email</p>
-                <input type="text" name="UserName" placeholder="Username"
-                    value={formData.UserName} onChange={handleChange} />
+        <>
+            {successMessage && (
+                <div className="alert alert-success toast-success" role="alert">
+                    {successMessage}
+                </div>
+            )}
+            <div className='signin-container'>
+                <form className='signin-form' onSubmit={handleSubmit}>
+                    <h1 className='signin-title'>Sign In</h1>
+                    <p className="signin-note ps-1 mb-1 text-muted"> Enter username or email</p>
+                    <input type="text" name="UserName" placeholder="Username"
+                        value={formData.UserName} onChange={handleChange} />
 
-                <input type="email" name="Email" placeholder="Email"
-                    value={formData.Email} onChange={handleChange} />
+                    <input type="email" name="Email" placeholder="Email"
+                        value={formData.Email} onChange={handleChange} />
 
-                <input type="password" name="PasswordHash" placeholder="Password"
-                    value={formData.PasswordHash} onChange={handleChange} className='mb-3' />
-                {error && <p className='signin-error' style={{ color: 'red' }}>{error}</p>}
-                <button type="submit" className='btn signin-form-btn'>Sign In</button>
-            </form>
-        </div>
+                    <input type="password" name="PasswordHash" placeholder="Password"
+                        value={formData.PasswordHash} onChange={handleChange} className='mb-3' />
+                    {error && <p className='signin-error' style={{ color: 'red' }}>{error}</p>}
+                    <button type="submit" className='btn signin-form-btn'>Sign In</button>
+                </form>
+            </div>
+        </>
     );
 };
 
