@@ -27,6 +27,8 @@ const SignIn = () => {
             localStorage.setItem('token', token);
             // After successful Sign in redirect to movie listing page
             navigate('/movies');
+            // Reload window to update authentication status
+            window.location.reload();
         } 
         catch (err) {
         setError('Invalid username, email, or password. Please try again');
