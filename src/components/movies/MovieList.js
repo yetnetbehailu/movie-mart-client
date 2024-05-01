@@ -10,6 +10,7 @@ const MovieList = () => {
 
     // Define state to hold the list of movies
     const [movies, setMovies] = useState([]);
+    const [userRole, setUserRole] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [movieToDelete, setMovieToDelete] = useState(null);
@@ -39,6 +40,29 @@ const MovieList = () => {
         fetchMovies();
     }, []); // The empty dependency array ensures this effect will be executed only once when the component is first rendered
 
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    return; // Return if token not found
+                }
+    
+                const response = await axios.get('http://localhost:5012/api/auth/user-roles/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUserRole(response.data.roles); // roles array retrieved from backend
+            } catch (error) {
+                console.error('Error fetching user role:', error);
+            }
+        };
+    
+        fetchUserRole();
+    }, []);
+    
 
     const handleDelete = async () => {
         try {
@@ -90,16 +114,18 @@ const MovieList = () => {
                                 Director: {movie.director.name}
                             </p>
                         </div>
-                        <div className="d-flex justify-content-evenly mt-2">
-                            <Link to={`/movies/edit/${movie.movieId}`} className="btn card-btn">
-                                <i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit
-                            </Link>
-                            <button className="btn card-btn" onClick={() => {
-                                setMovieToDelete(movie.movieId); // Set movieToDelete state
-                                setShowDeleteModal(true);
-                                }}><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete
-                            </button>
-                        </div>
+                        {userRole.includes('Admin') && (
+                            <div className="d-flex justify-content-evenly mt-2">
+                                <Link to={`/movies/edit/${movie.movieId}`} className="btn card-btn">
+                                    <i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit
+                                </Link>
+                                <button className="btn card-btn" onClick={() => {
+                                    setMovieToDelete(movie.movieId); // Set movieToDelete state
+                                    setShowDeleteModal(true);
+                                    }}><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete
+                                </button>
+                            </div>
+                        )}
                         <p className="text-center my-1">
                             <small className="text-muted fs-date">Release date: <span>{formatDate(movie.releaseDate)}</span></small>
                         </p>
