@@ -11,3 +11,16 @@
 .navbar-nav .nav-link{
     color: #100016f2;
 }
+
+/* Unauthorized message display */
+.unauthorized-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+    .unauthorized-message {
+    text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+}
