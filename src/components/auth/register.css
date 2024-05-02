@@ -48,6 +48,12 @@
     background-color: #e0c8e9e3;
 }
 
+.validation-error{
+    color: #980000;
+    font-family: "Crimson Text", sans-serif;
+    padding-left: 5px;
+}
+
 /* ________________ Media Queries ______________ */
 
 /* Medium screens */
