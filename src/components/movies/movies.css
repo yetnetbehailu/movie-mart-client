@@ -28,11 +28,11 @@ mark {
     margin-top: 1px;
 }
 
-.page-title {
+.movie-listing-title {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
     font-family: "Josefin Sans", sans-serif;
+    margin: 0.5rem 0rem;
+    color: #100016f2;
 }
 
 .text-font {

@@ -14,6 +14,7 @@ const MovieList = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [movieToDelete, setMovieToDelete] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // useEffect hook to fetch movies when the component is first rendered
     useEffect(() => {
@@ -45,6 +46,7 @@ const MovieList = () => {
         const fetchUserRole = async () => {
             try {
                 const token = localStorage.getItem('token');
+                setIsLoggedIn(!!token);
                 if (!token) {
                     return; // Return if token not found
                 }
@@ -88,12 +90,15 @@ const MovieList = () => {
             )}
             <div className="container pt-4">
                 <div className="row">
+                    <h1 className="movie-listing-title">MovieMart</h1>
+                    {userRole.includes('Admin') && (
                     <div className="create-movie-content">
-                    <span className="py-1 px-2">Click here to add a movie</span>
-                    <Link to="/movies/create" className="btn create-movie-btn">
-                        <i className="pe-1 fa-regular fa-square-plus fa-sm"></i>New
-                    </Link>
+                        <span className="py-1 px-2">Click here to add a movie</span>
+                        <Link to="/movies/create" className="btn create-movie-btn">
+                            <i className="pe-1 fa-regular fa-square-plus fa-sm"></i>New
+                        </Link>
                     </div>
+                    )}
                 </div>
                 <div className="row">
                     {/* Map over the list of movies to render use movieId as key to identify each movie */}
@@ -124,6 +129,13 @@ const MovieList = () => {
                                     setShowDeleteModal(true);
                                     }}><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete
                                 </button>
+                            </div>
+                        )}
+                        {!userRole.includes('Admin') && (
+                            <div className="text-center">
+                                <Link to={isLoggedIn ? '#' : '/signin'} className="btn card-btn">Buy Now
+                                    <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
+                                </Link>
                             </div>
                         )}
                         <p className="text-center my-1">

@@ -17,6 +17,8 @@ const MovieDetails = () => {
     const [error, setError] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [movieToDelete, setMovieToDelete] = useState(null);
+    const [userRole, setUserRole] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
     useEffect(() => {
@@ -33,6 +35,29 @@ const MovieDetails = () => {
 
         fetchMovieDetails();
     }, [movieId]);
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                setIsLoggedIn(!!token);
+                if (!token) {
+                    return;
+                }
+    
+                const response = await axios.get('http://localhost:5012/api/auth/user-roles/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUserRole(response.data.roles);
+            } catch (error) {
+                console.error('Error fetching user role:', error);
+            }
+        };
+    
+        fetchUserRole();
+    }, []);
 
     if (loading) {
         return (
@@ -74,7 +99,7 @@ const MovieDetails = () => {
                                 <mark>{movie.genre.name}</mark>
                             </p>
                             <p className="fs-6 pt-1">
-                                {formatDuration(movie.duration)}
+                                Duration: {formatDuration(movie.duration)}
                             </p>
                         </div>
                         <img src={movie.imageUrl} alt={`Movie ${movie.title}`} className="movie-image" />
@@ -99,6 +124,7 @@ const MovieDetails = () => {
                             <p className="fs-5">
                                 Language: {movie.language}
                             </p>
+                            {userRole.includes('Admin') && (
                             <div className="d-flex justify-content-evenly mt-2">
                                 <Link to={`/movies/edit/${movie.movieId}`} className="btn card-btn">
                                     <i className="fa-regular fa-pen-to-square fa-sm p-1"></i>Edit
@@ -109,6 +135,14 @@ const MovieDetails = () => {
                                     }}><i className="fa-regular fa-trash-can fa-sm p-1"></i>Delete
                                 </button>
                             </div>
+                            )}
+                            {!userRole.includes('Admin') && (
+                            <div className="text-center">
+                                <Link to={isLoggedIn ? '#' : '/signin'} className="btn card-btn">Buy Now
+                                    <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
+                                </Link>
+                            </div>
+                            )}
                             <p className="text-center mt-2 mb-3">
                                 <small className="text-muted fs-date">Release date: <span>{formatDate(movie.releaseDate)}</span></small>
                             </p>
