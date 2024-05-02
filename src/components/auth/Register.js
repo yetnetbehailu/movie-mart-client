@@ -18,7 +18,7 @@ const Registration = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         // Clear corresponding error message when the input changes
-        setErrors({ ...errors, [e.target.name]: '' });
+        setErrors((prevErrors) => ({ ...prevErrors, [e.target.name]: '' }));
     };
 
     const handleSubmit = async (e) => {
