@@ -1,4 +1,8 @@
 export function formatDate(dateString) {
+    if (dateString === null) {
+        return "Not available";
+    }
+
     // Create a Date object from the provided string
     const date = new Date(dateString);
 
