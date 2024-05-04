@@ -1,4 +1,8 @@
 export const formatDuration = (durationString) => {
+    if (durationString === null) {
+        return "Not available"; // Default value returned
+    }
+
     // Split duration string into hours, minutes, & seconds
     const [hours, minutes, seconds] = durationString.split(":");
     // Convert hours & minutes to int
