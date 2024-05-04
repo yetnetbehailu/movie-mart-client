@@ -32,7 +32,10 @@ const MovieEdit = () => {
                 const response = await axios.get(`http://localhost:5012/api/movies/${movieId}`);
 
                 // Adjust format of the release date
-                const releaseDateWithoutTime = response.data.releaseDate.split('T')[0]; // Only retrieve the date
+                let releaseDateWithoutTime = '';
+                if (response.data.releaseDate !== null) {
+                    releaseDateWithoutTime = response.data.releaseDate.split('T')[0]; // Only retrieve the date
+                }
 
                 // Destructure the response data and merge with adjusted release date format
                 const { releaseDate, ...rest } = response.data;
@@ -68,6 +71,14 @@ const MovieEdit = () => {
                 actors: actorsArray
             }));
         }
+        else if(name === 'duration'){
+            // Check if duration is empty string, if so, set it to null
+            const durationValue = value.trim() === '' ? null : value;
+            setMovieData(prevState => ({
+                ...prevState,
+                [name]: durationValue
+            }));
+        }
         else {
             setMovieData(prevState => ({
                 ...prevState,
@@ -85,9 +96,14 @@ const MovieEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const movieDataToSend = {
+            ...movieData,
+            releaseDate: movieData.releaseDate === '' ? null : movieData.releaseDate
+        };
+
         try {
             // Send the complete movieData object to the backend URL for movie update
-            const response = await axios.put(`http://localhost:5012/api/movies/${movieId}`, movieData, {
+            const response = await axios.put(`http://localhost:5012/api/movies/${movieId}`, movieDataToSend, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -140,7 +156,7 @@ const MovieEdit = () => {
                                 </div>
                                 <div className="col-md-6 mb-3 d-flex justify-content-center justify-content-md-start duration-content">
                                     <label htmlFor="duration" className="form-label">Duration</label>
-                                    <input type="text" className="form-control" id="duration" name="duration" value={movieData.duration} onChange={handleChange} placeholder="HH:MM:SS"/>
+                                    <input type="text" className="form-control" id="duration" name="duration" value={movieData.duration || ''} onChange={handleChange} placeholder="HH:MM:SS"/>
                                 </div>
                             </div>
                             <div className='mb-3 d-flex'>
