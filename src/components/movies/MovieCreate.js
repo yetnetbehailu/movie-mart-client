@@ -62,10 +62,11 @@ const MovieCreate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Set duration to null if it's an empty string to match backend expectations
+        // Set duration & releaseDate to null if they're empty strings to match backend expectations
         const movieDataToSend = {
             ...movieData,
-            duration: movieData.duration === '' ? null : movieData.duration
+            duration: movieData.duration === '' ? null : movieData.duration,
+            releaseDate: movieData.releaseDate === '' ? null : movieData.releaseDate
         };
 
         // Form field validations
