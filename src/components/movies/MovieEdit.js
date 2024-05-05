@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./movieCreate.css";
 
 
@@ -199,6 +200,13 @@ const MovieEdit = () => {
                 </div>
             )}
             <div className="container">
+                <div className="row">
+                    <div className="col-10 offset-1 col-md-8 offset-md-2 mt-4">
+                        <Link to="/movies" className="go-back-link">
+                            <i className="fa-solid fa-angles-left"></i> Go back
+                        </Link>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-10 offset-1 col-md-8 offset-md-2 movie-form">
                         <h1 className="form-title">Edit Movie</h1>

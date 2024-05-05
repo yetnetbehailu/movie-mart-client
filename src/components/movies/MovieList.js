@@ -108,9 +108,9 @@ const MovieList = () => {
                         <p className="card-genre fs-5">
                             <mark>{movie.genre.name}</mark>
                         </p>
-                        <a>
+                        <Link to={`/movies/details/${movie.movieId}`}>
                             <img src={movie.imageUrl} alt={`Movie ${movie.title}`} className="movie-image" />
-                        </a>
+                        </Link>
                         <div className="text-center mt-2">
                             <p className="mb-0">
                                 {movie.title}
