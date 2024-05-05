@@ -7,6 +7,7 @@ import Modal from "./MovieDeleteModal";
 import { formatDate } from "../../helpers/formatDate";
 import { formatDuration } from "../../helpers/formatDuration";
 import "./movieDetails.css"; 
+import placeholderImage from '../../images/placeholder-img.png';
 
 const MovieDetails = () => {
     const navigate = useNavigate();
@@ -102,7 +103,9 @@ const MovieDetails = () => {
                                 Duration: {formatDuration(movie.duration)}
                             </p>
                         </div>
-                        <img src={movie.imageUrl} alt={`Movie ${movie.title}`} className="movie-image" />
+                        <Link to={`/movies/details/${movie.movieId}`}>
+                            <img src={movie.imageUrl || placeholderImage } alt={`Movie ${movie.title}`} className="movie-image" />
+                        </Link>
                         <div className="movie-details-body mt-2">
                             <p className="mb-0 text-center">
                                 {movie.title}

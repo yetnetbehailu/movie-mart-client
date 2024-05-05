@@ -28,6 +28,8 @@ const Navbar = () => {
         setIsLoggedIn(false);
          // Reload the page to reflect updated authentication status
         window.location.reload();
+
+        window.location.href = '/movies';
     };
 
     return(

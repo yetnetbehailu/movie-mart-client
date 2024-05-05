@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./movies.css";
 import { formatDate } from "../../helpers/formatDate";
 import Modal from "./MovieDeleteModal";
+import placeholderImage from '../../images/placeholder-img.png';
 
 // MovieList functional component
 const MovieList = () => {
@@ -109,7 +110,7 @@ const MovieList = () => {
                             <mark>{movie.genre.name}</mark>
                         </p>
                         <Link to={`/movies/details/${movie.movieId}`}>
-                            <img src={movie.imageUrl} alt={`Movie ${movie.title}`} className="movie-image" />
+                            <img src={movie.imageUrl || placeholderImage } alt={`Movie ${movie.title}`} className="movie-image" />
                         </Link>
                         <div className="text-center mt-2">
                             <p className="mb-0">
