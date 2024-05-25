@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import Modal from "./MovieDeleteModal";
+import PurchaseModal from "./MoviePurchaseModal";
 import { formatDate } from "../../helpers/formatDate";
 import { formatDuration } from "../../helpers/formatDuration";
 import "./movieDetails.css"; 
@@ -20,6 +21,7 @@ const MovieDetails = () => {
     const [movieToDelete, setMovieToDelete] = useState(null);
     const [userRole, setUserRole] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
 
     useEffect(() => {
@@ -82,6 +84,13 @@ const MovieDetails = () => {
             setShowDeleteModal(false);
         }
     };
+
+    const handlePurchase = () => {
+        setShowPurchaseModal(true);
+        setTimeout(() => {
+            setShowPurchaseModal(false);
+        }, 5000);
+    };
     return (
         <>
             <div className="container pt-4">
@@ -141,9 +150,17 @@ const MovieDetails = () => {
                             )}
                             {!userRole.includes('Admin') && (
                             <div className="text-center">
-                                <Link to={isLoggedIn ? '#' : '/signin'} className="btn card-btn">Buy Now
-                                    <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
-                                </Link>
+                                {isLoggedIn ? (
+                                    <button className="btn card-btn" onClick={handlePurchase}>
+                                        Buy Now
+                                        <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
+                                    </button>
+                                ) : (
+                                    <Link to="/signin" className="btn card-btn">
+                                        Buy Now
+                                        <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
+                                    </Link>
+                                )}
                             </div>
                             )}
                             <p className="text-center mt-2 mb-3">
@@ -158,6 +175,10 @@ const MovieDetails = () => {
                 movieTitle={movie.title}
                 onConfirm={handleDelete}
                 onCancel={() => setShowDeleteModal(false)}
+            />
+            <PurchaseModal
+                show={showPurchaseModal}
+                onClose={() => setShowPurchaseModal(false)}
             />
         </>
     );

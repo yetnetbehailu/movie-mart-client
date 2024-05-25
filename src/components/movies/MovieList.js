@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./movies.css";
 import { formatDate } from "../../helpers/formatDate";
 import Modal from "./MovieDeleteModal";
+import PurchaseModal from "./MoviePurchaseModal";
 import placeholderImage from '../../images/placeholder-img.png';
 
 // MovieList functional component
@@ -16,6 +17,7 @@ const MovieList = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [movieToDelete, setMovieToDelete] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
     // useEffect hook to fetch movies when the component is first rendered
     useEffect(() => {
@@ -80,6 +82,12 @@ const MovieList = () => {
         }
     };
 
+    const handlePurchase = () => {
+        setShowPurchaseModal(true);
+        setTimeout(() => {
+            setShowPurchaseModal(false);
+        }, 5000);
+    };
 
     // Render the MovieList component
     return (
@@ -134,9 +142,17 @@ const MovieList = () => {
                         )}
                         {!userRole.includes('Admin') && (
                             <div className="text-center">
-                                <Link to={isLoggedIn ? '#' : '/signin'} className="btn card-btn">Buy Now
-                                    <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
-                                </Link>
+                                {isLoggedIn ? (
+                                    <button className="btn card-btn" onClick={handlePurchase}>
+                                        Buy Now
+                                        <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
+                                    </button>
+                                ) : (
+                                    <Link to="/signin" className="btn card-btn">
+                                        Buy Now
+                                        <i className="fa-solid fa-cart-shopping fa-sm p-1"></i>
+                                    </Link>
+                                )}
                             </div>
                         )}
                         <p className="text-center my-1">
@@ -152,6 +168,10 @@ const MovieList = () => {
                 movieTitle={movies.find(movie => movie.movieId === movieToDelete)?.title}
                 onConfirm={handleDelete}
                 onCancel={() => setShowDeleteModal(false)}
+            />
+            <PurchaseModal
+                show={showPurchaseModal}
+                onClose={() => setShowPurchaseModal(false)}
             />
         </>
     );

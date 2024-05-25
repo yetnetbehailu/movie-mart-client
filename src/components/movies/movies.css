@@ -153,6 +153,53 @@ mark {
     box-shadow: 0px 0px 3px 1px rebeccapurple inset;
 }
 
+/* ________Movie purchase confirmation modal_________*/
+.purchase-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.purchase-modal-content {
+    background: rgb(142 231 162);
+    border: solid 2px #379933;
+    padding: 20px;
+    border-radius: 1rem;
+    text-align: center;
+    position: relative;
+    font-family: "Crimson Text", sans-serif;
+}
+
+.purchase-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.5rem;
+}
+
+.purchase-modal-title {
+    margin: 0;
+}
+
+.purchase-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: -0.5rem; 
+}
+
+.purchase-modal-body {
+    margin-top: 1rem;
+}
+
 /* ________________ Media Queries ______________ */
 
 /* Mobile small screens */
@@ -225,6 +272,10 @@ mark {
     .modal-content{
         width: 60%;
     }
+
+    .purchase-modal-content{
+        width: 60%;
+    }
 }
 
 /* Large screens */
@@ -241,6 +292,10 @@ mark {
     .modal-content {
         width: 50%;
     }
+
+    .purchase-modal-content{
+        width: 50%;
+    }
 }
 
 /* X-Large screens */
@@ -255,6 +310,10 @@ mark {
     }
 
     .modal-content{
+        width: 40%;
+    }
+
+    .purchase-modal-content{
         width: 40%;
     }
 }
